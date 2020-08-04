@@ -1,0 +1,5 @@
+{
+  "elementPresentTimeout": "10",
+  "baseUrl": "https://masters.musala.com/",
+  "defaultDriver": "Firefox"
+}

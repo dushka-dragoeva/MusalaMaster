@@ -1,5 +1,4 @@
-﻿using MusalaMaster.Core.Pages;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 
 namespace MusalaMaster.Core.Pages
 {
@@ -9,10 +8,6 @@ namespace MusalaMaster.Core.Pages
             base(driver)
         {
         }
-
-        public override string Url => "https://masters.musala.com/";
-
-        public override string Title => "Meet the Masters";
 
         public IWebElement SignInLink => Driver.FindElement(By.LinkText("Sign In"));
 

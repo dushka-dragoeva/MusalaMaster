@@ -11,9 +11,7 @@ namespace MusalaMaster.Core.Pages
         {
         }
 
-        public override string Url => "https://masters.musala.com/login";
-
-        public override string Title => "Meet the Masters";
+        public override string UrlPart => "login";
 
         public IWebElement Username => Driver.FindElement(By.Id("login-form_username"));
 
@@ -26,9 +24,7 @@ namespace MusalaMaster.Core.Pages
         public void FillForm(SignInModel userCreditential)
         {
             Username.SendKeys(userCreditential.Username);
-            log.Info($"Entered username {userCreditential.Username}");
             Password.SendKeys(userCreditential.Password);
-            log.Info($"Entered password {userCreditential.Password}");
         }
 
         public void Submit()

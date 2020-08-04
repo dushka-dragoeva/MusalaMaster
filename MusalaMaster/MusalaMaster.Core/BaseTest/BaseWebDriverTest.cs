@@ -1,35 +1,29 @@
-﻿using log4net;
+﻿using MusalaMaster.Core.Factories;
+using MusalaMaster.Core.Pages;
 using NUnit.Framework;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Support.UI;
 using System;
-using System.Reflection;
+using System.Diagnostics;
 
 namespace MusalaMaster.Core.Tests
 {
     [TestFixture]
     public abstract class BaseWebDriverTest
     {
-        private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
-        private TestContext testContextInstance;
-
-        public virtual TestContext TestContextInstance
-        {
-            get
-            {
-                return testContextInstance;
-            }
-            set
-            {
-                testContextInstance = value;
-            }
-        }
-
+        protected static HomePage _homePage;
+        protected static SignInPage _signInPage;
         public IWebDriver Driver { get; set; }
 
-       
+        [SetUp]
+        public virtual void SetupTest()
+        {
+            Driver = DriverFactory.CreateDriver();
+            _homePage = new HomePage(Driver);
+            _homePage.NavigateTo();
+        }
+
         [TearDown]
-        public void TeardownTest()
+        public virtual void TeardownTest()
         {
             try
             {
@@ -37,7 +31,7 @@ namespace MusalaMaster.Core.Tests
             }
             catch (Exception ex)
             {
-                log.Error(ex.Message);
+                Trace.WriteLine(ex.Message);
             }
         }
     }
