@@ -1,23 +1,23 @@
 ﻿using System;
-using System.Diagnostics;
-using MusalaMaster.Core.Factories;
-using MusalaMaster.Core.Pages;
+using Microsoft.Extensions.Configuration;
 using NUnit.Framework;
 using OpenQA.Selenium;
+using MusalaMaster.Core.Pages;
 
 namespace MusalaMaster.Core.BaseTests
 {
     [TestFixture]
     public abstract class BaseTest
     {
-        protected static HomePage _homePage;
+        protected HomePage _homePage;
+
         public IWebDriver Driver { get; set; }
+        public IConfiguration Configuration { get; set; }
 
         [SetUp]
         public virtual void SetupTest()
         {
-            Driver = DriverFactory.CreateDriver();
-            _homePage = new HomePage(Driver);
+            _homePage = new HomePage(Driver, Configuration);
             _homePage.NavigateTo();
         }
 
@@ -30,7 +30,7 @@ namespace MusalaMaster.Core.BaseTests
             }
             catch (Exception ex)
             {
-                Trace.WriteLine(ex.Message);
+                Console.WriteLine(ex.Message);
             }
         }
 

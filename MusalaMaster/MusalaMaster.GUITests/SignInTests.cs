@@ -2,28 +2,27 @@ using MusalaMaster.Core.Factories;
 using MusalaMaster.Core.Models;
 using MusalaMaster.Core.Pages;
 using MusalaMaster.Core.BaseTests;
-using MusalaMaster.GUITests.Utils;
 using NUnit.Framework;
 
-namespace MusalaMaster.UITests.Tests
+namespace MusalaMaster.GUITests
 {
+    [Parallelizable]
     [TestFixture]
-    public class SignInTests : BaseTest
+    public class SignInTests : TestHook
     {
-        private static SignInPage _signInPage;
+        private SignInPage _signInPage;
 
         [SetUp]
         public override void SetupTest()
         {
             base.SetupTest();
-            _signInPage = new SignInPage(Driver);
+            _signInPage = new SignInPage(Driver, Configuration);
         }
 
         [Test]
-        [TestCaseSource(typeof(TestCasesGenarotor), "GenerateSignInTestCases", new object[] { "invalid_user_creditentials.csv" })]
-        public void StateMessageAppeared_When_SignInWithInvalidCreditentials(string username, string password)
+        public void StateMessageAppeared_When_SignInWithInvalidCreditentials()
         {
-            SignInModel userCreditentials = SignInFactory.CreateModel(username, password);
+            SignInModel userCreditentials = SignInFactory.CreateModel("Pepi", "12345");
 
             _homePage.SignInLink.Click();
 

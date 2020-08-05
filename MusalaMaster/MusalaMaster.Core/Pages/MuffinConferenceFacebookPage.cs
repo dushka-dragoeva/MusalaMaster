@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using Microsoft.Extensions.Configuration;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
@@ -8,8 +9,8 @@ namespace MusalaMaster.Core.Pages
 {
     public class MuffinConferenceFacebookPage : BasePage
     {
-        public MuffinConferenceFacebookPage(IWebDriver driver) 
-            : base(driver)
+        public MuffinConferenceFacebookPage(IWebDriver driver, IConfiguration configuration)
+            : base(driver, configuration)
         {
         }
 

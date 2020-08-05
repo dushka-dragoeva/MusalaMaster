@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using Microsoft.Extensions.Configuration;
-using MusalaMaster.Core.Helpers;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 
@@ -10,14 +8,16 @@ namespace MusalaMaster.Core.Pages
 {
     public class BasePage
     {
-        private static IConfiguration _configuration => ConfigurationHelper.GetIConfigurationRoot();
-
-        public BasePage(IWebDriver driver)
+        public BasePage(IWebDriver driver, IConfiguration configuaration)
         {
             Driver = driver;
+            Configuration = configuaration;
+
         }
 
-        public IWebDriver Driver;
+        public IWebDriver Driver { get; set; }
+
+        public IConfiguration Configuration { get; set; }
 
         public virtual string Url => GetUrl(UrlPart, QueryPart);
 
@@ -25,7 +25,7 @@ namespace MusalaMaster.Core.Pages
 
         public virtual string QueryPart { get; set; }
 
-        public virtual int Timeout => int.Parse(_configuration["elementPresentTimeout"]);
+        public virtual int Timeout => int.Parse(Configuration["elementPresentTimeout"]);
 
         public void NavigateTo()
         {
@@ -45,7 +45,7 @@ namespace MusalaMaster.Core.Pages
             }
             catch (TimeoutException ex)
             {
-                Trace.WriteLine(ex.Message);
+                Console.WriteLine(ex.Message);
                 throw new NoSuchElementException($"{by}", ex);
             }
 
@@ -62,7 +62,7 @@ namespace MusalaMaster.Core.Pages
             }
             catch (TimeoutException ex)
             {
-                Trace.WriteLine(ex.Message);
+                Console.WriteLine(ex.Message);
                 throw new NoSuchElementException($"{by}", ex);
             }
 
@@ -88,9 +88,9 @@ namespace MusalaMaster.Core.Pages
             }
         }
 
-        private static string GetUrl(string urlPart, string query)
+        private string GetUrl(string urlPart, string query)
         {
-            var builder = new UriBuilder(new Uri(_configuration["baseUrl"]))
+            var builder = new UriBuilder(new Uri(Configuration["baseUrl"]))
             {
                 Path = urlPart,
                 Query = query,

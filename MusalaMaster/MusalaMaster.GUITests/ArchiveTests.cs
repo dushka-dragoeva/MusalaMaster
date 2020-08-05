@@ -4,18 +4,19 @@ using MusalaMaster.Core.BaseTests;
 
 namespace MusalaMaster.GUITests
 {
+    [Parallelizable]
     [TestFixture]
-    public class ArchiveTests : BaseTest
+    public class ArchiveTests : TestHook
     {
-        private static ArchivePage _archivePage;
+        private ArchivePage _archivePage;
         private EventPage _eventPage;
 
         [SetUp]
         public override void SetupTest()
         {
             base.SetupTest();
-            _archivePage = new ArchivePage(Driver);
-            _eventPage = new EventPage(Driver);
+            _archivePage = new ArchivePage(Driver, Configuration);
+            _eventPage = new EventPage(Driver, Configuration);
         }
 
         [Test]
@@ -27,7 +28,7 @@ namespace MusalaMaster.GUITests
 
             _archivePage.ScrollDown();
             _archivePage.LastEvent.Click();
-            
+
             _eventPage.PrintEventContent();
         }
     }

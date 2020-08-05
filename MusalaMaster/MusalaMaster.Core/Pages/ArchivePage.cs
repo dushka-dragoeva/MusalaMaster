@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using Microsoft.Extensions.Configuration;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using System.Linq;
 
@@ -6,20 +7,19 @@ namespace MusalaMaster.Core.Pages
 {
     public class ArchivePage : BasePage
     {
-        public ArchivePage(IWebDriver driver)
-            : base(driver)
+        public ArchivePage(IWebDriver driver, IConfiguration configuration)
+            : base(driver, configuration)
         {
         }
 
         public override string UrlPart => "archive";
 
-       public IWebElement LastEvent => WaitForElementsPresent(By.XPath("//*[@id='events-cont']//*[@class='event-magnifier']")).Last();
-        
+        public IWebElement LastEvent => WaitForElementsPresent(By.XPath("//*[@id='events-cont']//*[@class='event-magnifier']")).Last();
+
         public void ScrollDown()
         {
-            Actions actions = new Actions(Driver);
-            actions.MoveToElement(LastEvent);
-            actions.Perform();
+            var javaScriptExecutor = (IJavaScriptExecutor)Driver;
+            javaScriptExecutor.ExecuteScript("window.scrollTo(0,document.body.scrollHeight);");
         }
     }
 }

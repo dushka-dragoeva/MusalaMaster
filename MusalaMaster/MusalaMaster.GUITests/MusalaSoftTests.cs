@@ -1,12 +1,12 @@
-﻿using MusalaMaster.Core.Helpers;
-using MusalaMaster.Core.Pages;
+﻿using MusalaMaster.Core.Pages;
 using MusalaMaster.Core.BaseTests;
 using NUnit.Framework;
 
 namespace MusalaMaster.GUITests
 {
+    [Parallelizable]
     [TestFixture]
-    public class MusalaSoftTests : BaseTest
+    public class MusalaSoftTests : TestHook
     {
         private MusalaSoftPage _musalaSoftPage;
         private MuffinConferenceFacebookPage _muffinConferenceFacebookPage;
@@ -15,15 +15,14 @@ namespace MusalaMaster.GUITests
         public override void SetupTest()
         {
             base.SetupTest();
-            _musalaSoftPage = new MusalaSoftPage(Driver);
-            _muffinConferenceFacebookPage = new MuffinConferenceFacebookPage(Driver);
+            _musalaSoftPage = new MusalaSoftPage(Driver, Configuration);
+            _muffinConferenceFacebookPage = new MuffinConferenceFacebookPage(Driver, Configuration);
         }
 
         [Test]
         public void CorectPagesOpenedAndProfilePictureDisplayed_When_ClickCorespondingLinks()
         {
-            var config = ConfigurationHelper.GetIConfigurationRoot();
-            bool isChromDriver = config["defaultDriver"] == "Chrome";
+            bool isChromDriver = Configuration["defaultDriver"] == "Chrome";
 
             _homePage.MusalaSoftLink.Click();
             SwitchToTab(1);

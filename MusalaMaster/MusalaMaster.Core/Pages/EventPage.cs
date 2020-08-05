@@ -1,20 +1,17 @@
-﻿using OpenQA.Selenium;
+﻿using Microsoft.Extensions.Configuration;
+using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Text;
 
 namespace MusalaMaster.Core.Pages
 {
     public class EventPage : BasePage
     {
-        public EventPage(IWebDriver driver)
-            : base(driver)
+        public EventPage(IWebDriver driver, IConfiguration configuration)
+            : base(driver, configuration)
         {
         }
-
-        /// public IWebElement EventContent => WaitForElementPresent(By.Id("content"));
 
         public IEnumerable<IWebElement> EventContent => WaitForElementsPresent(By.XPath("//*[@id='content']/ul"));
 
