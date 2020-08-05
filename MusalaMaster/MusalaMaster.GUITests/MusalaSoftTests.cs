@@ -1,6 +1,6 @@
 ﻿using MusalaMaster.Core.Helpers;
 using MusalaMaster.Core.Pages;
-using MusalaMaster.Core.Tests;
+using MusalaMaster.Core.BaseTests;
 using NUnit.Framework;
 
 namespace MusalaMaster.GUITests
@@ -20,7 +20,7 @@ namespace MusalaMaster.GUITests
         }
 
         [Test]
-        public void StateMessageAppeared_When_SignInWithInvalidCreditentials()
+        public void CorectPagesOpenedAndProfilePictureDisplayed_When_ClickCorespondingLinks()
         {
             var config = ConfigurationHelper.GetIConfigurationRoot();
             bool isChromDriver = config["defaultDriver"] == "Chrome";

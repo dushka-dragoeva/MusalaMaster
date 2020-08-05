@@ -1,6 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
-using System.Threading;
 using Microsoft.Extensions.Configuration;
 using MusalaMaster.Core.Helpers;
 using OpenQA.Selenium;
@@ -42,6 +42,23 @@ namespace MusalaMaster.Core.Pages
             try
             {
                 result = Wait(Timeout).Until(x => x.FindElement(by));
+            }
+            catch (TimeoutException ex)
+            {
+                Trace.WriteLine(ex.Message);
+                throw new NoSuchElementException($"{by}", ex);
+            }
+
+            return result;
+        }
+
+        protected IEnumerable<IWebElement> WaitForElementsPresent(By by)
+        {
+            IEnumerable<IWebElement> result = null;
+            try
+            {
+                Wait(Timeout).Until(x => x.FindElements(by).Count > 0);
+                result = Driver.FindElements(by);
             }
             catch (TimeoutException ex)
             {

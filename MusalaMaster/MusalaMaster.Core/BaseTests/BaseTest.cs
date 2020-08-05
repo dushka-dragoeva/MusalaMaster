@@ -5,7 +5,7 @@ using MusalaMaster.Core.Pages;
 using NUnit.Framework;
 using OpenQA.Selenium;
 
-namespace MusalaMaster.Core.Tests
+namespace MusalaMaster.Core.BaseTests
 {
     [TestFixture]
     public abstract class BaseTest

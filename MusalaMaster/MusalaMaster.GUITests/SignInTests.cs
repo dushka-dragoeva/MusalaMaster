@@ -1,7 +1,7 @@
 using MusalaMaster.Core.Factories;
 using MusalaMaster.Core.Models;
 using MusalaMaster.Core.Pages;
-using MusalaMaster.Core.Tests;
+using MusalaMaster.Core.BaseTests;
 using MusalaMaster.GUITests.Utils;
 using NUnit.Framework;
 
@@ -26,7 +26,9 @@ namespace MusalaMaster.UITests.Tests
             SignInModel userCreditentials = SignInFactory.CreateModel(username, password);
 
             _homePage.SignInLink.Click();
+
             _signInPage.EnsurePageLoaded();
+
             _signInPage.FillForm(userCreditentials);
             _signInPage.Submit();
 
