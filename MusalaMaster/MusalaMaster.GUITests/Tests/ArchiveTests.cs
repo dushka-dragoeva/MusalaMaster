@@ -2,7 +2,7 @@
 using MusalaMaster.Core.Pages;
 using MusalaMaster.Core.BaseTests;
 
-namespace MusalaMaster.GUITests
+namespace MusalaMaster.GUITests.Tests
 {
     [Parallelizable]
     [TestFixture]

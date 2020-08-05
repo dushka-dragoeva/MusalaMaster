@@ -1,14 +1,14 @@
+using System;
+using NUnit.Framework;
+using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Firefox;
 using MusalaMaster.Core.Factories;
 using MusalaMaster.Core.Models;
 using MusalaMaster.Core.Pages;
 using MusalaMaster.Core.BaseTests;
 using MusalaMaster.GUITests.Utils;
-using NUnit.Framework;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Firefox;
-using System;
 
-namespace MusalaMaster.GUITests
+namespace MusalaMaster.GUITests.Tests
 {
     [Parallelizable]
     [TestFixture]

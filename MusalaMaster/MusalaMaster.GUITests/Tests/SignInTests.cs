@@ -1,10 +1,10 @@
+using NUnit.Framework;
 using MusalaMaster.Core.Factories;
 using MusalaMaster.Core.Models;
 using MusalaMaster.Core.Pages;
 using MusalaMaster.Core.BaseTests;
-using NUnit.Framework;
 
-namespace MusalaMaster.GUITests
+namespace MusalaMaster.GUITests.Tests
 {
     [Parallelizable]
     [TestFixture]
