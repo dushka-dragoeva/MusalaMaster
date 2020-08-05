@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using NUnit.Framework;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
+using MusalaMaster.Core.Pages;
 
 namespace MusalaMaster.Core.BaseTests
 {
@@ -29,6 +30,13 @@ namespace MusalaMaster.Core.BaseTests
             }
         }
 
+        [SetUp]
+        public virtual void SetupTest()
+        {
+            _homePage = new HomePage(Driver, Configuration);
+            _homePage.NavigateTo();
+        }
+
         [TearDown]
         public virtual void TeardownTest()
         {
@@ -41,6 +49,8 @@ namespace MusalaMaster.Core.BaseTests
                 Console.WriteLine(ex.Message);
             }
         }
+
+        protected void SwitchToTab(int tabIndex) => Driver.SwitchTo().Window(Driver.WindowHandles[tabIndex]);
 
         private IConfiguration GetConfiguration()
         {
