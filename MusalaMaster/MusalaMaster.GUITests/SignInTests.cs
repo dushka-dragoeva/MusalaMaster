@@ -8,8 +8,10 @@ using NUnit.Framework;
 namespace MusalaMaster.UITests.Tests
 {
     [TestFixture]
-    public class SignInTests : BaseWebDriverTest
+    public class SignInTests : BaseTest
     {
+        private static SignInPage _signInPage;
+
         [SetUp]
         public override void SetupTest()
         {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Threading;
 using Microsoft.Extensions.Configuration;
 using MusalaMaster.Core.Helpers;
 using OpenQA.Selenium;
@@ -9,9 +10,8 @@ namespace MusalaMaster.Core.Pages
 {
     public class BasePage
     {
-        // TODO Singlton in seprate class, add sections
         private static IConfiguration _configuration => ConfigurationHelper.GetIConfigurationRoot();
-       
+
         public BasePage(IWebDriver driver)
         {
             Driver = driver;
@@ -19,15 +19,13 @@ namespace MusalaMaster.Core.Pages
 
         public IWebDriver Driver;
 
-        public string Url => GetUrl(UrlPart, QueryPart);
+        public virtual string Url => GetUrl(UrlPart, QueryPart);
 
         public virtual string UrlPart { get; set; }
 
         public virtual string QueryPart { get; set; }
 
         public virtual int Timeout => int.Parse(_configuration["elementPresentTimeout"]);
-
-        public virtual string Title => "Meet the Masters";
 
         public void NavigateTo()
         {
@@ -57,6 +55,7 @@ namespace MusalaMaster.Core.Pages
         public void EnsurePageLoaded(bool onlyCheckUrlStartsWithExpectedText = true)
         {
             bool urlIsCorrect;
+
             if (onlyCheckUrlStartsWithExpectedText)
             {
                 urlIsCorrect = Driver.Url.StartsWith(Url);
@@ -66,8 +65,7 @@ namespace MusalaMaster.Core.Pages
                 urlIsCorrect = Driver.Url == Url;
             }
 
-            bool pageHasLoaded = urlIsCorrect;//&& (Driver.Title == Title);
-            if (!pageHasLoaded)
+            if (!urlIsCorrect)
             {
                 throw new Exception($"Failed to load page. Page URL = '{Driver.Url}' Page Source: \r\n {Driver.PageSource}");
             }

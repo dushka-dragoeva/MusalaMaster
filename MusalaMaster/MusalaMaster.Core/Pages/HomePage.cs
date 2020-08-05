@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using System.Collections.Generic;
+using OpenQA.Selenium;
 
 namespace MusalaMaster.Core.Pages
 {
@@ -13,6 +14,8 @@ namespace MusalaMaster.Core.Pages
 
         public IWebElement Archive => Driver.FindElement(By.LinkText("Archive"));
 
-        public IWebElement MusalaSoftLink => WaitForElementPresent(By.CssSelector("[src='/images/Musala-logo.png']"));
+        public IWebElement MusalaSoftLink => Driver.FindElement(By.CssSelector("[src='/images/Musala-logo.png']"));
+
+        public IWebElement FacebookLink => Driver.FindElement(By.CssSelector("[src='/images/icon_facebook.png']"));
     }
 }

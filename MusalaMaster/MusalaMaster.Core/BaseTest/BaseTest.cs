@@ -1,17 +1,16 @@
-﻿using MusalaMaster.Core.Factories;
+﻿using System;
+using System.Diagnostics;
+using MusalaMaster.Core.Factories;
 using MusalaMaster.Core.Pages;
 using NUnit.Framework;
 using OpenQA.Selenium;
-using System;
-using System.Diagnostics;
 
 namespace MusalaMaster.Core.Tests
 {
     [TestFixture]
-    public abstract class BaseWebDriverTest
+    public abstract class BaseTest
     {
         protected static HomePage _homePage;
-        protected static SignInPage _signInPage;
         public IWebDriver Driver { get; set; }
 
         [SetUp]
@@ -34,5 +33,7 @@ namespace MusalaMaster.Core.Tests
                 Trace.WriteLine(ex.Message);
             }
         }
+
+        protected void SwitchToTab(int tabIndex) => Driver.SwitchTo().Window(Driver.WindowHandles[tabIndex]);
     }
 }
